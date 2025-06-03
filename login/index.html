@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="/style/index.css">
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="email">Email:</label><br/>
+        <input type="email" id="email" required /><br/><br/>
+
+        <label for="password">Senha:</label><br/>
+        <input type="password" id="password" required /><br/><br/>
+
+        <button type="submit">Entrar</button>
+    </form>
+
+    <script>
+        (function(){
+            const part1Encoded = 'RXZlcmU='; 
+            const part2 = '.error@';
+            const part3Encoded = 'Z21haWwuY29t';
+
+            function decodeBase64(str) {
+                return atob(str);
+            }
+
+            const part1 = decodeBase64(part1Encoded);
+            const part3 = decodeBase64(part3Encoded);
+
+            const validEmail = part1 + part2 + part3; 
+
+           
+            const passwordEncoded = 'RXZlcmUwOQ=='; 
+
+            const validPassword = decodeBase64(passwordEncoded);
+
+            const form = document.getElementById('loginForm');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const emailInput = document.getElementById('email').value.trim();
+                const passwordInput = document.getElementById('password').value;
+
+                if(emailInput === validEmail && passwordInput === validPassword) {
+                    window.location.href = 'home.html';
+                } else {
+                    alert('Dados de email e senha não conferem');
+                }
+            });
+        })();
+       
+    </script>
+</body>
+</html>
